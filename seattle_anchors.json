@@ -1,0 +1,20 @@
+{
+  "id": "seattle_certified_floorplan",
+  "venue_report_name": "Seattle Office New",
+  "description": "Seattle venue: detect box widened around CSV extent; spatial_anchors match measured min/max lon/lat from the walk.",
+  "detect": {
+    "lat_min": 47.6085,
+    "lat_max": 47.6145,
+    "lon_min": -122.3395,
+    "lon_max": -122.3335
+  },
+  "spatial_anchors": {
+    "lon_west": -122.3365,
+    "lon_east": -122.3355,
+    "lat_south": 47.6110,
+    "lat_north": 47.6120,
+    "flip_north": true
+  },
+  "floorplan_relative_path": "assets/image (3).png",
+  "rsrp_legend_png_relative_path": "assets/cellular_rsrp_all_operators_4g_5g.png"
+}
