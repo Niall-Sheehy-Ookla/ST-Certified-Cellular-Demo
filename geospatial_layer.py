@@ -134,7 +134,7 @@ class GeospatialLayer:
             key="cert_gen_allop_report",
             type="primary",
             disabled=not certified_ready,
-            use_container_width=True,
+            width="stretch",
         )
 
         if gen and certified_ready and fp_bytes is not None and anchors is not None:
@@ -154,7 +154,7 @@ class GeospatialLayer:
             if err:
                 st.error(err)
             elif fig is not None:
-                st.pyplot(fig, use_container_width=True)
+                st.pyplot(fig, width="stretch")
                 st.session_state.allop_report_bytes[map_metric] = figure_to_png_bytes(
                     fig, dpi=REPORT_FIGURE_DPI
                 )
@@ -172,5 +172,5 @@ class GeospatialLayer:
                 file_name="Olli_All_Operator_Reports.zip",
                 mime="application/zip",
                 key="cert_allop_zip_dl",
-                use_container_width=True,
+                width="stretch",
             )

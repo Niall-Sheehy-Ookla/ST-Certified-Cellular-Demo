@@ -221,7 +221,7 @@ class CarrierBenchmark:
         
         # Display radar chart
         fig = self.create_radar_chart()
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
         
         # Display detailed metrics table
         st.subheader("Detailed Metrics by Carrier")
@@ -235,7 +235,7 @@ class CarrierBenchmark:
         # Color code the table values
         st.dataframe(
             comparison_df,
-            use_container_width=True,
+            width="stretch",
             height=250
         )
         
@@ -248,7 +248,7 @@ class CarrierBenchmark:
         ]].copy()
         
         raw_metrics = raw_metrics.round(2)
-        st.dataframe(raw_metrics, use_container_width=True)
+        st.dataframe(raw_metrics, width="stretch")
         
         # Summary insights
         st.subheader("Key Insights")

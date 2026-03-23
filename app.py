@@ -31,6 +31,7 @@ from methodology_sandbox import (
     VPN_TYPE_OPTIONS,
     build_bucket_scoring_card_df,
     build_metric_scoring_card_df,
+    coerce_metrics_column_to_str,
     default_manual_inputs,
     migrate_manual_dict,
 )
@@ -261,15 +262,16 @@ with st.sidebar:
             st.caption(
                 "Per tier: Σ(Raw×Weight) = weight × Σ(Raw) when all metrics in the tier share the same weight."
             )
+            _bucket_df = coerce_metrics_column_to_str(build_bucket_scoring_card_df(_detail))
             st.dataframe(
-                build_bucket_scoring_card_df(_detail),
-                use_container_width=True,
+                _bucket_df,
+                width="stretch",
                 hide_index=True,
             )
             with st.expander("Per-metric breakdown"):
                 st.dataframe(
                     build_metric_scoring_card_df(_detail),
-                    use_container_width=True,
+                    width="stretch",
                     hide_index=True,
                     height=320,
                 )
@@ -315,7 +317,7 @@ with tab1:
             st.metric("Carriers Found", df_active["Network"].nunique())
 
         st.subheader("Data Preview")
-        st.dataframe(df_active.head(10), use_container_width=True, height=300)
+        st.dataframe(df_active.head(10), width="stretch", height=300)
 
         if st.button("🔄 Process Metrics", key="process_btn", type="primary"):
             with st.spinner("Processing metrics..."):
@@ -330,7 +332,7 @@ with tab1:
         )
         st.dataframe(
             _mdisp,
-            use_container_width=True,
+            width="stretch",
             height=400,
             column_config=build_column_config_for_metrics_display(_mdisp),
         )
@@ -400,7 +402,7 @@ with tab2:
         )
         st.dataframe(
             detailed_view,
-            use_container_width=True,
+            width="stretch",
             height=400,
             column_config=build_column_config_for_metrics_display(detailed_view),
         )
@@ -515,7 +517,7 @@ with tab3:
 
         st.dataframe(
             display_df,
-            use_container_width=True,
+            width="stretch",
             height=300,
             column_config=build_column_config_for_metrics_display(display_df),
         )
@@ -627,16 +629,17 @@ with tab5:
                 "Each row: count of metrics in the tier, sum of raw points, shared weight per metric, "
                 "and Σ(Raw×Weight) (equals weight × Σ Raw within the tier)."
             )
+            _bucket_tab5 = coerce_metrics_column_to_str(build_bucket_scoring_card_df(det))
             st.dataframe(
-                build_bucket_scoring_card_df(det),
-                use_container_width=True,
+                _bucket_tab5,
+                width="stretch",
                 hide_index=True,
             )
 
             st.subheader("Per-metric contributions")
             st.dataframe(
                 build_metric_scoring_card_df(det),
-                use_container_width=True,
+                width="stretch",
                 hide_index=True,
                 height=400,
             )

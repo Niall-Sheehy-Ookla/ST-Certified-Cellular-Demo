@@ -85,6 +85,17 @@ def migrate_manual_dict(manual: Dict[str, Any]) -> Dict[str, Any]:
     return out
 
 
+def coerce_metrics_column_to_str(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    PyArrow / st.dataframe: bucket summaries use int counts and '' in ``Metrics`` — force str.
+    """
+    if df is None or len(df) == 0 or "Metrics" not in df.columns:
+        return df
+    out = df.copy()
+    out["Metrics"] = out["Metrics"].astype(str)
+    return out
+
+
 def build_bucket_scoring_card_df(detail: Dict[str, Any]) -> pd.DataFrame:
     """
     Summary rows: [Raw Points] × [Weight] = [Weighted Score] per tier + total.
